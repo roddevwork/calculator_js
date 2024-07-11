@@ -7,7 +7,22 @@ document.addEventListener('DOMContentLoaded', function () {
 			const value = this.value
 			if (value === '=') {
 				try {
-					screen.value = eval(screen.value)
+					const screenValue = screen.value
+
+					// Manejo de porcentajes
+					const regex = /(\d+)%(\d+)/
+					if (regex.test(screenValue)) {
+						const matches = screenValue.match(regex)
+						const percentage = parseFloat(matches[1])
+						const number = parseFloat(matches[2])
+						screen.value = ((percentage / 100) * number).toString()
+					} else if (screenValue.includes('%')) {
+						screen.value = (
+							parseFloat(screenValue.replace('%', '')) / 100
+						).toString()
+					} else {
+						screen.value = eval(screenValue)
+					}
 				} catch {
 					screen.value = 'Error'
 				}
@@ -15,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				screen.value = ''
 			} else if (value === '%') {
 				try {
-					screen.value = (parseFloat(screen.value) / 100).toString()
+					screen.value += '%'
 				} catch {
 					screen.value = 'Error'
 				}
