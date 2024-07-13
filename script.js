@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					screen.value = 'Error'
 				}
 			} else if (value === 'C') {
+				eva
 				screen.value = ''
 			} else if (value === '%') {
 				try {
