@@ -91,7 +91,7 @@ input[value]:hover {
 @media (width <= 600px) {
 	.calculator {
 		width: 90%;
-		max-width: 280px;
+		max-width: 300px;
 	}
 
 	#screen,

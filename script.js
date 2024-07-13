@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		button.addEventListener('click', function () {
 			const value = this.value
 			if (value === '=') {
+				if (screen.value.trim() === '') {
+					return // No hacer nada si no hay datos en la pantalla
+				}
 				try {
 					const screenValue = screen.value
 
@@ -27,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					screen.value = 'Error'
 				}
 			} else if (value === 'C') {
-				eva
 				screen.value = ''
 			} else if (value === '%') {
 				try {
