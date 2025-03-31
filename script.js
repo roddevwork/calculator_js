@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-	const screen = document.getElementById('screen')
+	const screen = document.querySelector('.display input[type="text"]')
 	const buttons = document.querySelectorAll(".calculator input[type='button']")
 
 	// Función para manejar las entradas

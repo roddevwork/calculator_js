@@ -2,11 +2,13 @@
 	--background-color: #121212;
 	--text-color: #ffffff;
 	--font-family: Arial, sans-serif;
-	--highlight-color: #ffff00; /* Neon yellow */
+	--highlight-color: #ff6600; /* Naranja */
 	--calculator-bg-color: #222;
 	--button-bg-color: #333;
 	--button-hover-bg-color: #444;
-	--box-shadow-color: #ffff00;
+}
+* {
+	box-sizing: border-box;
 }
 
 body {
@@ -33,70 +35,113 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
 	padding: 20px;
 	border: 2px solid var(--highlight-color);
 	border-radius: 10px;
 	background-color: var(--calculator-bg-color);
-	width: 100%;
 	max-width: 400px;
 }
+.display {
+	width: 100%;
+}
+.buttons {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+}
 
-#screen {
-	width: calc(100% - 20px);
-	padding: 15px;
+.number-colors {
+	background-color: var(--button-bg-color); /* Blanco para los números */
+	color: var(--text-color);
+}
+.symbol-colors {
+	background-color: var(--button-bg-color); /* Blanco para los números */
+	color: var(--highlight-color);
+}
+
+input[type='text'] {
+	width: 100%;
+	padding: 20px;
 	margin-bottom: 20px;
-	font-size: 1.5em;
+	font-size: 2.5em;
 	border: none;
 	border-radius: 5px;
 	background-color: var(--button-bg-color);
 	color: var(--highlight-color);
 	text-align: right;
-	box-shadow: 0 0 10px var(--box-shadow-color);
-}
-
-.buttons {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 10px;
-	width: 100%;
+	/* box-shadow: 0 0 10px var(--box-shadow-color); */
 }
 
 input[type='button'] {
 	padding: 20px;
-	font-size: 1.2em;
+	font-size: 1.5em;
 	border: none;
 	border-radius: 5px;
-	background-color: var(--button-bg-color);
-	color: var(--highlight-color);
 	cursor: pointer;
 	transition: background-color 0.3s, box-shadow 0.3s;
 	box-shadow: 0 0 10px var(--box-shadow-color);
 	text-align: center;
 }
+input[value]:hover {
+	font-weight: bold;
+}
 
 input[type='button']:hover {
 	background-color: var(--button-hover-bg-color);
-	box-shadow: 0 0 20px var(--box-shadow-color);
 }
 
 input[type='button'].equal {
-	grid-column: span 4;
+	grid-column: span 2;
+	background-color: var(--button-bg-color); /* Blanco para los números */
+	color: var(--text-color);
 }
 
-input[value]:hover {
-	color: var(--text-color);
-	font-weight: bold;
+input[type='button'].equal:hover {
+	background-color: var(--highlight-color);
+	font-size: 2.2rem;
+}
+
+input[type='button'][value='00'] {
+	grid-column: span 1; /* El '00' ocupará una sola celda */
+}
+
+input[type='button'][value='000'] {
+	grid-column: span 1; /* El '000' ocupará una sola celda */
 }
 
 @media (width <= 600px) {
 	.calculator {
-		width: 90%;
-		max-width: 300px;
+		width: calc(100% - 10px); /* Deja un margen de 10px a cada lado */
+		max-width: none;
+		height: 100vh;
+		border-radius: 10px;
+		padding: 20px 0;
+		box-sizing: border-box;
 	}
 
-	#screen,
+	#screen {
+		width: 100%;
+		font-size: 3em; /* Aumenta el tamaño de la pantalla */
+		padding: 20px;
+	}
+	.buttons {
+		grid-template-columns: repeat(
+			4,
+			1fr
+		); /* Mantén los botones de 4 columnas */
+		gap: 5px; /* Reduce el espacio entre botones */
+	}
+
 	input[type='button'] {
-		font-size: 1.2em;
-		padding: 10px;
+		padding: 30px; /* Aumenta el padding de los botones */
+		font-size: 2em; /* Aumenta el tamaño de los botones en pantallas pequeñas */
+		width: 100%; /* Asegura que los botones ocupen el 100% del ancho */
+	}
+}
+@media (width <= 440px) {
+	input[type='button'] {
+		padding: 20px; /* Aumenta el padding de los botones */
+		font-size: 1.7em; /* Aumenta el tamaño de los botones en pantallas pequeñas */
 	}
 }
