@@ -12,10 +12,16 @@
 		<header>
 			<h1>Calculator</h1>
 		</header>
-		<main class="calculator">
+		<main class="calculator-container">
+			<button id="toggle-history" class="history-button">History</button>
+			<div class="history hidden" id="history-container">
+				<ul id="history-list"></ul>
+			</div>
+
 			<div class="display">
 				<input type="text" readonly placeholder="0" />
 			</div>
+
 			<div class="buttons">
 				<input type="button" value="(" class="symbol-colors" />
 				<input type="button" value=")" class="symbol-colors" />
@@ -42,7 +48,7 @@
 				<input type="button" value="=" class="equal" class="equal-color" />
 			</div>
 		</main>
-		<h2>By Rod</h2>
+		<footer>By Rod</footer>
 		<script src="script.js"></script>
 	</body>
 </html>

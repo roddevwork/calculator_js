@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 	const screen = document.querySelector('.display input[type="text"]')
 	const buttons = document.querySelectorAll(".calculator input[type='button']")
+	let history = []
 
 	// Función para manejar las entradas
 	function handleInput(value) {
@@ -23,8 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
 						parseFloat(screenValue.replace('%', '')) / 100
 					).toString()
 				} else {
-					screen.value = eval(screenValue)
+					screen.value = parseFloat(eval(screenValue)).toFixed(5) // Evaluar la expresión matemática
 				}
+
+				// Agregar al historial y actualizar la vista
+				if (history.length > 4) {
+					history.shift() // Eliminar la entrada más antigua
+				}
+				history.push(`${screenValue} = ${screen.value}`)
+				updateHistoryDisplay()
 			} catch (error) {
 				screen.value = 'Error'
 			}
@@ -37,6 +45,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		} else {
 			screen.value += value
 		}
+	}
+
+	// Función para actualizar la vista del historial
+	function updateHistoryDisplay() {
+		const historyList = document.getElementById('history-list')
+		historyList.innerHTML = '' // Limpiar el historial actual
+
+		// Recorrer el array history y agregar cada entrada a la lista
+		history.forEach((entry) => {
+			const listItem = document.createElement('li')
+			listItem.textContent = entry
+			historyList.appendChild(listItem)
+		})
 	}
 
 	// Añadir event listener para botones de la calculadora
@@ -58,4 +79,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			handleInput('←')
 		}
 	})
+
+	// Event listener para mostrar/ocultar historial
+	document
+		.getElementById('toggle-history')
+		.addEventListener('click', function () {
+			document.getElementById('history-container').classList.toggle('hidden')
+		})
 })
