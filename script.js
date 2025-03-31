@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 	const screen = document.querySelector('.display input[type="text"]')
-	const buttons = document.querySelectorAll(".calculator input[type='button']")
+	const buttons = document.querySelectorAll(
+		".calculator-container input[type='button']"
+	)
 	let history = []
 
 	// Función para manejar las entradas
